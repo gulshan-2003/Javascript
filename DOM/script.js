@@ -142,6 +142,81 @@ for (let i = 0; i < fruits.length; i++) {
   fruits[i].style.fontSize = "20px";    // change font size
 }
 
+//============ Reading Properties: textContent, innerText, innerHTML======
+
+/*🔹 textContent
+
+Returns all text inside an element (even hidden with CSS).
+Faster, safer for just text.
+
+🔹 innerText
+
+Returns the visible text only (ignores hidden).
+Triggers reflow (slower).
+
+🔹 innerHTML
+
+Returns the HTML inside the element, including tags.
+Useful when you want both text and structure.
+*/
+
+// ======== Editing Text Safely with textContent=======
+/*🔹 Why use textContent for editing?
+
+Safest way to set plain text inside an element.
+It does not parse HTML, so no risk of injecting unwanted tags or scripts.
+*/
+
+let heading1 = document.querySelector("#title1");
+console.log(heading1.textContent);
+heading1.textContent = "Welcome to JavaScript DOM!";
+console.log(heading1.textContent);
+let para1 = document.querySelector("#para");
+console.log(para1.textContent);
+para1.textContent = "This text has been replaced safely.";
+console.log(para1.textContent);
+
+// ========Editing with innerHTML========
+/*🔹 What is innerHTML?
+
+Allows you to set or get HTML content inside an element.
+Unlike textContent, it parses HTML tags.
+*/
+
+let box = document.querySelector("#box")
+box.innerHTML = "<h2 style ='color:blue'>Replaced with Heading</h2>"
+box.innerHTML =box.innerHTML+` 
+   <ul>
+    <li>Mango</li>
+    <li>Apple</li>
+   </ul>
+   `;
+
+  //  ==============Styles: style.property = value and CSS classes=========
+  /*🔹 Two Ways to Apply Styles via JS
+1) Inline Style (directly on element)
+   Use the .style property:*/
+
+   let style1 = document.querySelector("#title");
+   style1.style.color = "Red";
+   style1.style.fontSize = "30px";
+   style1.style.backgroundColor = "peach";
+
+   let para = document.querySelector(".desc");
+
+// Add class
+para.classList.add("highlight");
+
+// Remove class
+para.classList.remove("highlight");
+
+// Toggle (add if missing, remove if present)
+para.classList.toggle("highlight");
+
+/*🔹 When to Use Which?
+
+✅ classList → best for multiple style changes, maintainable code.
+⚡ .style → quick one-off inline edits (not reusable).*/
 
 
 
