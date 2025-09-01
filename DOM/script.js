@@ -202,21 +202,122 @@ box.innerHTML =box.innerHTML+`
    style1.style.fontSize = "30px";
    style1.style.backgroundColor = "peach";
 
-   let para = document.querySelector(".desc");
+   let par = document.querySelector(".desc");
 
 // Add class
-para.classList.add("highlight");
+par.classList.add("highlight");
 
 // Remove class
-para.classList.remove("highlight");
+par.classList.remove("highlight");
 
 // Toggle (add if missing, remove if present)
-para.classList.toggle("highlight");
+par.classList.toggle("highlight");
 
 /*🔹 When to Use Which?
 
 ✅ classList → best for multiple style changes, maintainable code.
 ⚡ .style → quick one-off inline edits (not reusable).*/
+
+
+/*🔹 Why Create Nodes Dynamically?
+
+Add new elements without writing them in HTML.
+Useful for lists, forms, messages, dynamic UI, etc.*/
+
+// 1) Create an Element
+let newDiv = document.createElement("div");
+newDiv.textContent = "I was created with JS";
+document.body.appendChild(newDiv);
+// 👉 Creates a <div> and adds it at the end of body.
+
+// 2) Create Text Node (alternative)
+let newPara = document.createElement("p");
+let textNode = document.createTextNode("This is a paragraph");
+newPara.appendChild(textNode);
+document.body.appendChild(newPara);
+// 👉 Same as above, but explicitly using createTextNode.
+
+// 3) Add Attributes
+let btn = document.createElement("button");
+btn.textContent = "Click Me";
+btn.setAttribute("id", "myBtn");
+btn.setAttribute("class", "primary-btn");
+document.body.appendChild(btn);
+
+/*
+appendChild()
+
+Accepts only Node objects (elements, text nodes, etc.)
+Returns the appended node.
+Not supported in old IE for multiple nodes.
+
+append()
+
+Accepts Node objects + strings (so you can append text directly).
+Can append multiple nodes/strings at once.
+Does not return the appended node (returns undefined).
+
+👉 Example:
+
+div.append("Hello", " World");     // works ✅
+div.appendChild("Hello");          // ❌ error (string not allowed)
+*/
+
+/*🔹 1) Remove an Element
+      Using .remove() (modern, simple)*/
+
+let para3 = document.querySelector("#para") 
+console.log("Before Removing : ",para3.textContent);
+para3.remove()   
+
+
+/*🔹 2) Replace an Element
+     Using replaceChild(newNode, oldNode)*/
+
+let list = document.querySelector("ul");
+let oldItem = document.querySelector("li");
+let newItem = document.querySelector("li");
+newItem.textContent = "PineApple";
+list.replaceChild(newItem,oldItem)
+// 👉 Here, the first <li> is replaced with "New Fruit".
+
+// 🔹 3) Clear All Child Nodes
+let container1 = document.querySelector(".desc")
+console.log(container1);
+container1.innerHTML ="";
+
+// =======Traversing the DOM========
+/*🔹 Why Traversal?
+
+To navigate through relatives in the DOM (parents, children, siblings).*/
+
+// 1) Parent
+let item = document.querySelector("li");
+console.log(item.parentNode);       // includes text nodes
+console.log(item.parentElement);    // only element nodes
+
+// 2) Children
+let list3 = document.querySelector("ul");
+
+console.log(list3.childNodes);   // includes text, comments, line breaks
+console.log(list3.children);     // only element children (HTMLCollection)
+console.log(list3.firstElementChild); // first <li>
+console.log(list3.lastElementChild);  // last <li>
+
+// '3) Siblings
+let item3 = document.querySelector("li");
+
+console.log(item3.nextElementSibling);     // next <li>
+console.log(item3.previousElementSibling); // previous <li>
+
+// 4) Closest Ancestor
+// let span = document.querySelector("span");
+// console.log(span.closest("div"));   // finds nearest parent <div>
+
+
+
+
+
 
 
 
