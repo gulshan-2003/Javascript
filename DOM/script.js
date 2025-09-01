@@ -316,7 +316,101 @@ console.log(item3.previousElementSibling); // previous <li>
 
 
 
+// =========DOM Events==========
 
+/*🔹 What are Events?
+
+Events are actions that happen in the browser (click, hover, typing, scrolling, etc.).
+You can listen to these events and run JavaScript in response.*/
+
+// 1) Inline Event (old way)
+
+// {/* <button onClick="alert('Clicked!')">Click Me</button> */}
+
+
+// 2) addEventListener() (modern way)
+
+let btn1 = document.querySelector("#myBtn");
+
+btn1.addEventListener("click", function() {
+  alert("Button was clicked");
+});
+
+
+/*3) Common Events
+
+Mouse → click, dblclick, mouseover, mouseout
+Keyboard → keydown, keyup, keypress
+Form → submit, input, change, focus, blur
+Window → load, resize, scroll 
+*/
+
+// 4) Example: Change Text on Click
+
+document.querySelector("#changeBtn").addEventListener("click", () => {
+  document.querySelector("#text").textContent="Text Changed"
+});
+
+document.querySelector("#changeBtn").addEventListener("click", () => {
+  document.querySelector("#text").style.backgroundColor="green"
+});
+
+document.querySelector("#inp").addEventListener('input', (event) => {
+  console.log(event.target.value);
+})
+
+
+// ===========Event Object & Event Properties==========
+
+/*🔹 1) What is the Event Object?
+
+ Whenever an event occurs, JavaScript automatically passes an event object to the handler, 
+ containing details about the event. */
+
+ document.querySelector("#myBtn").addEventListener('click', function(event){
+  console.log(event);
+ })
+
+// 🔹 2) Useful Event Properties
+
+// event.type → type of event
+
+btn1.addEventListener("click", e => {
+  console.log(e.type);
+})
+
+// event.target → the element that triggered the event
+
+document.querySelector("ul").addEventListener("click", e => {
+  console.log(e.target.textContent);  // logs clicked <li> text
+});
+
+// Example: Form Submit
+document.querySelector("#myForm").addEventListener("submit", function(e) {
+  e.preventDefault(); // stops page reload
+  console.log("Form submitted but prevented default reload!");
+});
+
+
+// ======Event Bubbling & Capturing======
+/*  Of course. Here is a last-minute revision note on the topic.
+
+JS Events: Bubbling vs. Capturing (Quick Revision)
+1. Event Bubbling (The Default)
+
+Direction: Up 🔼 (from Child → Parent → Grandparent)
+Behavior: This is the standard way browsers handle events.
+Main Use Case: Event Delegation (put one listener on a parent to handle events for many children).
+Analogy: A bubble rising from the bottom of a glass to the top.
+
+2. Event Capturing (The Specialist)
+
+Direction: Down 🔽 (from Grandparent → Parent → Child)
+Behavior: Not default. You must enable it.
+How to Enable: element.addEventListener('click', fn, { capture: true });
+Main Use Case: To intercept an event before it reaches its target.
+Analogy: A security guard stopping someone at the main gate before they reach their office.
+*/
 
 
 
